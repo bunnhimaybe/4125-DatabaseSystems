@@ -1,0 +1,14 @@
+D05, 31-Jan-23, 8
+D11, Jamie Foxx, Surgery
+D12, Tom Hardy, Anesthesiology
+D17, 31-Jan-23, 8
+D18, 31-Jan-23, 8
+P01, Taylor Swift, 32, D01
+P02, Bruno Mars, 31, D04
+P03, Justin Bieber, 29, D07
+N03, Chris Summa, 88000, N01
+N05, Vassil Roussev, 90000, N01
+N09, Tamjid Hoque, 88000, N01
+B18, 112, Intensive Care Unit, P07, N01
+B19, 113, Intensive Care Unit, NULL, NULL
+B20, 114, Intensive Care Unit, NULL, NULL

@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <unistd.h>
+
+void main() {
+	int pid; 
+	int parentPID;
+	
+	pid = getpid();
+	parentPID = getppid();
+	
+	printf("Example1.\n");
+	printf("PID: %d\n", pid);
+	printf("Parent PID: %d\n", parentPID);
+}
