@@ -1,0 +1,16 @@
+N01, Kathy Johnson, 120000, NULL
+N13, Vassil Roussev, 92000, N01
+N03, Chris Summa, 88000, N01
+N05, Mahdi Abdeguerfi, 90000, N01
+N09, Tamjid Hoque, 88000, N01
+N02, James Wagner, 75000, N05
+N04, Ben Samuel, 79000, N03
+N06, Allen Toussaint, 82000, N03
+N07, Ted Holmberg, 81000, N05
+N08, David Pace, 80000, N09
+N10, Dr. John, 80000, N09
+N11, Joe Sylve, 78000, N05
+N12, Redwan Newaz, 82000, N13
+N14, Shreya Banerjee, 83000, N13
+N15, Yasin Nur, 77000, N13
+N16, Adlai DePano, 89000, N01

@@ -1,0 +1,30 @@
+P01, Taylor Swift, 37, D01
+P02, Bruno Mars, 31, D04
+P03, Justin Bieber, 29, D07
+P04, Adele, 34, D10
+P05, Lady Gaga, 35, D02
+P06, Katy Perry, 40, D05
+P07, Rihanna, 39, D08
+P08, Chappell Roan, 27, D11
+P09, Ariana Grande, 32, D12
+P10, Alicia Keys, 36, D01
+P11, Post Malone, 29, D02
+P12, Beyonce, 37, D05
+P13, Britney Spears, 38, D08
+P14, Drake, 45, D23 
+P15, Doja Cat, 23, D19
+P16, Harry Styles, 33, D13
+P17, Dua Lipa, 28, D04
+P18, Lizzo, 29, D12
+P19, Kendrick Lamar, 38, D11
+P20, Miley Cyrus, 48, D02
+P21, Ozzy Osbourne, 19, D05
+P22, Shakira, 44, D15 
+P23, Kermit Ruffins, 42, D06 
+P24, Eminem, 60, D17
+P25, Rob Zombie, 70, D14 
+P26, Axl Rose, 66, D22
+P27, Billy Corgan, 58, D16 
+P28, Justin Timberlake, 49, D18
+P29, Karen O, 47, D23
+P30, Cardi B, 33, D08

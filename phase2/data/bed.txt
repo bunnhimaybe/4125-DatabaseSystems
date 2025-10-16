@@ -1,0 +1,60 @@
+B01, 101, Intensive Care Unit, NULL, NULL
+B02, 102, Intensive Care Unit, P11, N06
+B03, 103, Intensive Care Unit, NULL, NULL
+B04, 104, Intensive Care Unit, NULL, NULL
+B05, 105, Intensive Care Unit, P02, N04
+B06, 106, Intensive Care Unit, NULL, NULL
+B07, 107, Intensive Care Unit, NULL, NULL
+B08, 108, Intensive Care Unit, P19, N04
+B09, 109, Intensive Care Unit, NULL, NULL
+B10, 110, Intensive Care Unit, NULL, NULL
+B11, 101, Intensive Care Unit, P14, N01
+B12, 102, Intensive Care Unit, P24, N09
+B13, 104, Intensive Care Unit, P26, N06
+B14, 106, Intensive Care Unit, P23, N16
+B15, 108, Intensive Care Unit, NULL, NULL
+B16, 110, Intensive Care Unit, NULL, NULL
+B17, 111, Intensive Care Unit, NULL, NULL
+B18, 112, Intensive Care Unit, P07, N01
+B19, 113, Intensive Care Unit, NULL, NULL
+B20, 114, Intensive Care Unit, NULL, NULL
+B21, 201, Surgery, P01, N11
+B22, 202, Surgery, NULL, NULL
+B23, 203, Surgery, NULL, NULL
+B24, 204, Surgery, P22, N15
+B25, 205, Surgery, P27, N04
+B26, 206, Surgery, P05, N06
+B27, 207, Surgery, NULL, NULL
+B28, 208, Surgery, NULL, NULL
+B29, 209, Surgery, NULL, NULL
+B30, 201, Surgery, P17, N02
+B31, 203, Surgery, NULL, NULL
+B32, 205, Surgery, NULL, NULL
+B33, 207, Surgery, P20, N08
+B34, 209, Surgery, NULL, NULL
+B35, 210, Surgery, NULL, NULL
+B36, 211, Surgery, P10, N09
+B37, 212, Surgery, NULL, NULL
+B38, 213, Surgery, NULL, NULL
+B39, 214, Surgery, NULL, NULL
+B40, 215, Surgery, NULL, NULL
+B41, 1001, Rehabilitation, NULL, NULL
+B42, 1002, Rehabilitation, NULL, NULL
+B43, 1003, Rehabilitation, P04, N11
+B44, 1003, Rehabilitation, P29, N15
+B45, 1004, Rehabilitation, NULL, NULL
+B46, 1004, Rehabilitation, NULL, NULL
+B47, 1005, Rehabilitation, NULL, NULL
+B48, 1006, Rehabilitation, P13, N02
+B49, 1007, Rehabilitation, NULL, NULL
+B50, 1008, Rehabilitation, NULL, NULL
+B51, 1203, Long-Term Care, NULL, NULL
+B52, 1212, Long-Term Care, NULL, NULL
+B53, 1224, Long-Term Care, P08, N08
+B54, 1233, Long-Term Care, NULL, NULL
+B55, 1250, Long-Term Care, P30, N15
+B56, 1203, Long-Term Care, NULL, NULL
+B57, 1212, Long-Term Care, NULL, NULL
+B58, 1224, Long-Term Care, P16, N14
+B59, 1233, Long-Term Care, NULL, NULL
+B60, 1250, Long-Term Care, NULL, NULL

@@ -1,0 +1,23 @@
+D01, Anthony Mackie, Dermatology  
+D02, Margot Robbie, Anesthesiology
+D03, Ryan Gosling, Family Medicine
+D04, Dwayne Johnson, Surgery
+D05, Emma Stone, Internal Medicine 
+D06, Tom Hanks, Dermatology 
+D07, Idris Elba, Anesthesiology
+D08, Gal Gadot, Family Medicine
+D09, Will Ferrell, Internal Medicine
+D10, Chris Evans, Dermatology 
+D11, Jamie Foxx, Surgery
+D12, Tom Hardy, Anesthesiology
+D13, Rami Malek, Psychiatry
+D14, Vin Diesel, Psychiatry
+D15, Adam Driver,Cardiology
+D16, Scarlett Johansson, Family Medicine
+D17, Miles Teller, Cardiology
+D18, Salma Hayek, Psychiatry
+D19, Russell Crowe, Family Medicine
+D20, Ewan McGregor, Surgery
+D21, Ryan Reynolds, Family Medicine
+D22, Tom Cruise, Dermatology
+D23, Natalie Portman, Family Medicine
