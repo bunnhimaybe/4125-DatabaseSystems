@@ -31,6 +31,7 @@ public class Phase2_Task2 {
             // read input file
             File dataFile = new File( String.format("%s.txt", tableName));
             BufferedReader input = new BufferedReader(new FileReader(dataFile));
+            String line = input.readLine(); 
             
             // create output file 
             File outputFile = new File(String.format("%s.sql", tableName) );
@@ -38,52 +39,57 @@ public class Phase2_Task2 {
                 outputFile.delete();
             }
             
-            
-            String line = input.readLine(); 
-            // build SQL statement (process input line by line)
-            while (line != null) {
+            try (FileWriter writer = new FileWriter(outputFile, true) ) {
+             
+                // build SQL statement (process input line by line)
+                while (line != null) {
 
-                String[] lineSplit = line.split(",");
-                
-                // determine data type & format values
-                for (String split : lineSplit) {
-                    split = split.trim(); 
+                    String[] lineSplit = line.split(",");
+                    
+                    // determine data type & format values
+                    for (String split : lineSplit) {
+                        split = split.trim(); 
 
-                    try { // number
-                        Float.parseFloat(split);
-                        lineValues.add(split);
+                        try { // number
+                            Float.parseFloat(split);
+                            lineValues.add(split);
 
-                    } catch (NumberFormatException notDecimal) { // string
+                        } catch (NumberFormatException notDecimal) { // string
 
-                        if (split.equalsIgnoreCase("NULL")) {
-                            lineValues.add("NULL");
+                            if (split.equalsIgnoreCase("NULL")) {
+                                lineValues.add("NULL");
 
-                        } else {
-                            lineValues.add(String.format( "\'%s\'", split) );
+                            } else {
+                                if (split.contains("'")) {
+                                    split = split.replace("'", "''"); // escape ' char
+                                }
+                                lineValues.add(String.format( "\'%s\'", split) );
+                            }
                         }
                     }
-                }
-                
-                // template: INSERT INTO [tableName] VALUES(value, value);
-                StringBuilder statement = new StringBuilder("INSERT INTO ");
-                statement.append( String.format("%s VALUES(", tableName) );
-                statement.append( String.join(", ", lineValues) );
-                statement.append( ");\n" );
+                    
+                    // template: INSERT INTO [tableName] VALUES(value, value);
+                    StringBuilder statement = new StringBuilder("INSERT INTO ");
+                    statement.append( String.format("%s VALUES(", tableName) );
+                    statement.append( String.join(", ", lineValues) );
+                    statement.append( ");\n" );
 
-                // write to output file
-                try {
-                    FileWriter writer = new FileWriter(outputFile, true);
+                    // write to output file
                     writer.write(statement.toString());
-                    writer.close();
-                } catch (IOException e) {
-                    System.out.println("Error writing output file.");
-                    System.err.println(e.getMessage());
-                }
 
-                lineValues.clear();
-                
-                line = input.readLine(); 
-            } 
+                    lineValues.clear();
+                    
+                    line = input.readLine(); 
+                } 
+
+                // end of output file
+                writer.write("commit;");
+                writer.close();
+   
+            } catch (IOException e) {
+                System.out.println("Error writing output file.");
+                System.err.println(e.getMessage());
+            }
 
             input.close();
 

@@ -28,3 +28,4 @@ INSERT INTO patient VALUES('P27', 'Billy Corgan', 58, 'D16');
 INSERT INTO patient VALUES('P28', 'Justin Timberlake', 49, 'D18');
 INSERT INTO patient VALUES('P29', 'Karen O', 47, 'D23');
 INSERT INTO patient VALUES('P30', 'Cardi B', 33, 'D08');
+commit;
