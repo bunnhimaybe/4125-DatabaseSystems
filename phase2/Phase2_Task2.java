@@ -1,5 +1,3 @@
-package phase2;
-
 /* 
  * Nhi Pham 
  * CSCI 4125 Database Systems
@@ -26,7 +24,6 @@ public class Phase2_Task2 {
         }
 
         String tableName = args[0]; 
-        String line;
         ArrayList<String> lineValues = new ArrayList<>(); 
 
         try {
@@ -41,10 +38,11 @@ public class Phase2_Task2 {
                 outputFile.delete();
             }
             
+            
+            String line = input.readLine(); 
             // build SQL statement (process input line by line)
-            while (!input.readLine().equals(null)) {
+            while (line != null) {
 
-                line = input.readLine(); 
                 String[] lineSplit = line.split(",");
                 
                 // determine data type & format values
@@ -77,23 +75,25 @@ public class Phase2_Task2 {
                     FileWriter writer = new FileWriter(outputFile, true);
                     writer.write(statement.toString());
                     writer.close();
-                    System.out.println("WROTE " + statement.toString());
                 } catch (IOException e) {
                     System.out.println("Error writing output file.");
-                    e.printStackTrace();
-                    System.out.println("WRITING ERROR "+ statement.toString());
+                    System.err.println(e.getMessage());
                 }
 
                 lineValues.clear();
+                
+                line = input.readLine(); 
             } 
 
             input.close();
 
-        } catch (FileNotFoundException exception) { // input file does not exist
-            System.out.println("Invalid file.");
-            exception.printStackTrace();
+        } catch (FileNotFoundException e) { // input file does not exist
+            System.out.println("Error: File not found. Please check the filename and try again.");
+            return;
         } catch (IOException e) {
-            System.err.println(e);
+            System.out.println("An I/O error occurred.");
+            System.err.println(e.getMessage());
+            return;
         }
     }
 }
