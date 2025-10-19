@@ -14,3 +14,4 @@ INSERT INTO nurse VALUES('N12', 'Redwan Newaz', 82000, 'N13');
 INSERT INTO nurse VALUES('N14', 'Shreya Banerjee', 83000, 'N13');
 INSERT INTO nurse VALUES('N15', 'Yasin Nur', 77000, 'N13');
 INSERT INTO nurse VALUES('N16', 'Adlai DePano', 89000, 'N01');
+commit;

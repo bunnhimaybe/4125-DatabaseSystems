@@ -58,3 +58,4 @@ INSERT INTO bed VALUES('B57', 1212, 'Long-Term Care', NULL, NULL);
 INSERT INTO bed VALUES('B58', 1224, 'Long-Term Care', 'P16', 'N14');
 INSERT INTO bed VALUES('B59', 1233, 'Long-Term Care', NULL, NULL);
 INSERT INTO bed VALUES('B60', 1250, 'Long-Term Care', NULL, NULL);
+commit;

@@ -21,3 +21,4 @@ INSERT INTO physician VALUES('D20', 'Ewan McGregor', 'Surgery');
 INSERT INTO physician VALUES('D21', 'Ryan Reynolds', 'Family Medicine');
 INSERT INTO physician VALUES('D22', 'Tom Cruise', 'Dermatology');
 INSERT INTO physician VALUES('D23', 'Natalie Portman', 'Family Medicine');
+commit;

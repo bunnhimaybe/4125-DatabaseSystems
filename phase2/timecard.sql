@@ -98,3 +98,4 @@ INSERT INTO timecard VALUES('D18', '03-Feb-23', 8);
 INSERT INTO timecard VALUES('D20', '03-Feb-23', 4);
 INSERT INTO timecard VALUES('D21', '03-Feb-23', 8);
 INSERT INTO timecard VALUES('D23', '03-Feb-23', 8);
+commit;
