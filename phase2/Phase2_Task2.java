@@ -11,10 +11,8 @@ package phase2;
 */
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.lang.StringBuilder;
 
 public class Phase2_Task2 {
 
@@ -28,69 +26,65 @@ public class Phase2_Task2 {
         }
 
         String tableName = args[0]; 
+        String line;
+        ArrayList<String> lineValues = new ArrayList<>(); 
 
         try {
 
-            // read input file, line by line
-            File dataFile = new File( String.format("%s.txt", tableName)) ;
+            // read input file
+            File dataFile = new File( String.format("%s.txt", tableName));
             BufferedReader input = new BufferedReader(new FileReader(dataFile));
             
+            // create output file 
+            File outputFile = new File(String.format("%s.sql", tableName) );
+            if (outputFile.exists()) {
+                outputFile.delete();
+            }
+            
+            // build SQL statement (process input line by line)
             while (!input.readLine().equals(null)) {
 
-                String line = input.readLine(); 
-                String[] lineValues = line.split(",");
-                ArrayList<String> dataTypes = new ArrayList<>(); 
+                line = input.readLine(); 
+                String[] lineSplit = line.split(",");
                 
-                // classify data type
-                for (String str : lineValues){
-                    str = str.trim(); 
+                // determine data type & format values
+                for (String split : lineSplit) {
+                    split = split.trim(); 
 
-                    try { // decimal
-                        Float.parseFloat(str);
-                        dataTypes.add("Float");
-                    } catch (NumberFormatException notDecimal) {
-                    try { // integer
-                        Integer.parseInt(str); 
-                        dataTypes.add("NUMBER");
-                    } catch (NumberFormatException notInt) {
+                    try { // number
+                        Float.parseFloat(split);
+                        lineValues.add(split);
 
-                        if (str.toUpperCase().equals("NULL")) {
-                            
-                        }
-                        try {
-                            Float.parseFloat(str);
-                            dataTypes.add("Float");
-                        } catch (NumberFormatException notDecimal) {
-                            dataTypes.add("VARCHAR2()");
+                    } catch (NumberFormatException notDecimal) { // string
+
+                        if (split.equalsIgnoreCase("NULL")) {
+                            lineValues.add("NULL");
+
+                        } else {
+                            lineValues.add(String.format( "\'%s\'", split) );
                         }
                     }
                 }
-
-
-                // complete statement
-
-                // join array elements into one line
-                String lineDataTypes = String.join(",", dataTypes);
                 
-                // write to output file 
-                File scriptFile = new File( String.format("%s.sql", tableName) );
+                // template: INSERT INTO [tableName] VALUES(value, value);
+                StringBuilder statement = new StringBuilder("INSERT INTO ");
+                statement.append( String.format("%s VALUES(", tableName) );
+                statement.append( String.join(", ", lineValues) );
+                statement.append( ");\n" );
 
-                if (scriptFile.exists()) {
-                    scriptFile.delete();
-                }
-                
-                // append results to output file
+                // write to output file
                 try {
                     FileWriter writer = new FileWriter(outputFile, true);
-                    writer.write(lineDataTypes);
-                    writer.write("\n");
+                    writer.write(statement.toString());
                     writer.close();
-                    System.out.println("WROTE " + lineDataTypes);
+                    System.out.println("WROTE " + statement.toString());
                 } catch (IOException e) {
                     System.out.println("Error writing output file.");
                     e.printStackTrace();
-                    System.out.println("WRITING ERROR "+ lineDataTypes);
+                    System.out.println("WRITING ERROR "+ statement.toString());
                 }
+
+                lineValues.clear();
             } 
 
             input.close();
@@ -98,6 +92,8 @@ public class Phase2_Task2 {
         } catch (FileNotFoundException exception) { // input file does not exist
             System.out.println("Invalid file.");
             exception.printStackTrace();
+        } catch (IOException e) {
+            System.err.println(e);
         }
     }
 }
