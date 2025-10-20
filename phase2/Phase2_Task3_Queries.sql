@@ -75,10 +75,10 @@ FROM nurse n INNER JOIN bed b
 ON n.nurse_id = b.nurse_id;
 
 -- 10. For each physician ID, list the total number of hours worked.
-SELECT p.physician_name, SUM(c.c_hours)
+SELECT p.physician_id, SUM(c.c_hours)
 FROM physician p LEFT OUTER JOIN timecard c
 ON p.physician_id = c.physician_id
-GROUP BY p.physician_name;
+GROUP BY p.physician_id;
 
 -- 11. Retrieve the names of all nurses who do not monitor any beds.
 SELECT DISTINCT *

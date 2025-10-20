@@ -40,7 +40,7 @@ CREATE TABLE Nurse (
 CREATE TABLE Bed (
     bed_num VARCHAR2(4),
     bed_room_num NUMBER,
-    bed_unit VARCHAR2(15), 
+    bed_unit VARCHAR2(25), 
     patient_num VARCHAR2(4),
     nurse_id VARCHAR2(4),
     CONSTRAINT PK_Bed PRIMARY KEY (bed_num),

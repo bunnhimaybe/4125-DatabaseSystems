@@ -22,7 +22,7 @@ SELECT *
 FROM Item2
 WHERE I_Color IS NULL;
 
--- 6. Find all supplier phone numbers with the area code 805
+-- 6. Find all supplier phone numbers with the area code 219
 SELECT *
 FROM Supplier2
 WHERE S_Phone 
@@ -35,28 +35,28 @@ FROM Item2
 WHERE LOWER(I_Color) = 'violet';
 
 -- 8. Find all customers that live in a city with a supplier
-SELECT (*) 
+SELECT *
 FROM Customer2
 WHERE C_City 
 IN (SELECT S_City FROM Supplier2);
 
 -- 9. Find all orders in the year 2020 that were shipped by boat
-SELECT (*) 
+SELECT *
 FROM Orders2 
 WHERE LOWER(O_Shipmode) = 'boat'
 AND O_Date BETWEEN '01-JAN-2020' AND '31-DEC-2020';
 -- AND O_Date LIKE '%2020';
 
 -- 10. Find all of the items that have a size less than 30 and order the output by color
-SELECT (*) 
+SELECT *
 FROM Item2
 WHERE I_Size < 30 
 ORDER BY I_Color;
 
 -- 11. Find all items that are larger than the average size
-SELECT (*) 
-FROM Item 
-WHERE I_Size > (SELECT AVG(I_Size) FROM Item);
+SELECT *
+FROM Item2
+WHERE I_Size > (SELECT AVG(I_Size) FROM Item2);
 
 -- 12. Find the number of orders placed by customer 1
 SELECT COUNT(O_ID) 
@@ -81,10 +81,9 @@ for order in orders1:
 		if orders1.(O_CustID, O_SupplierID) == orders2.(O_CustID, O_SupplierID)
 			return order
 */
-SELECT O_ID 
-FROM Orders2 
-WHERE (O_Supplier AND O_CustID) 
-IN (SELECT (O_Supplier, O_CustID) 
-	FROM Orders2 O2
-	WHERE O1.O_ID != O2.O_ID)
-ORDER BY O_CUSTID, O_SupplierID;
+SELECT DISTINCT O1.O_ID, O1.O_CustID, O1.O_SuppID, O1.O_ItemID
+FROM Orders2 O1 INNER JOIN Orders2 O2
+ON O1.O_SuppID = O2.O_SuppID
+AND O1.O_CustID = O2.O_CustID
+AND O1.O_ID <> O2.O_ID
+ORDER BY O1.O_CustID, O1.O_SuppID, O_ID;

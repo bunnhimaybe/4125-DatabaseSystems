@@ -66,12 +66,12 @@ ORDER BY COUNT(*);
 
 
 
--- 2. Find cities with more than 3 customers
+-- 2. Find cities with more than 2 customers
 
 SELECT C_City, COUNT(*)
 FROM Customer2
 GROUP BY C_City
-HAVING COUNT(*) >= 3;
+HAVING COUNT(*) > 2;
 
 
 
@@ -99,11 +99,11 @@ HAVING COUNT(*) = (
 
 SELECT SUM(I_Price)
 FROM Orders2 INNER JOIN Item2
-ON O_ItemID = I_ID
+ON O_ItemID = I_ID;
 
 SELECT SUM(I_Price)
 FROM Orders2, Item2
-WHERE O_ItemID = I_ID
+WHERE O_ItemID = I_ID;
 
 
 
@@ -117,7 +117,7 @@ SELECT DISTINCT S_Name, S_City
 FROM Supplier2, Customer2
 WHERE S_City = C_City;
 
-SELECT S_ID, S_Name
+SELECT S_Name, S_City
 FROM Supplier2
 WHERE S_City IN (
                     SELECT C_City FROM Customer2
@@ -129,29 +129,30 @@ WHERE S_City IN (
 
 SELECT S_Name, S_City
 FROM Supplier2 OUTER LEFT JOIN Customer2
-ON S_City = C_City;
-
-SELECT S_Name, S_City
-FROM Supplier2 
-WHERE S_City != (
-                    SELECT C_City
-                    FROM Customer2
-                    ORDER BY C_City
-)
+ON S_City = C_City
+WHERE C_City IS NULL
+ORDER BY C_City;
 
 
 
 -- 7. Find the average size and price for each item color
 
 SELECT I_Color, AVG(I_Price)
-FROM ITEM
+FROM Item2
 GROUP BY I_Color;
 
 
 
 -- 8. Find the most common item color
 
-
+SELECT I_Color
+FROM Item2
+GROUP BY I_Color
+HAVING COUNT(*) = (
+                    SELECT MAX(COUNT(*))
+                    FROM Item2
+                    GROUP BY I_Color
+);
 
 -- 9. Find all shipping modes for Gremlins
 SELECT O_Shipmode
@@ -164,7 +165,7 @@ GROUP BY O_Shipmode;
 
 -- 10. Find the most common shipping mode for Gremlins
 
-SELECT MAX(COUNT(*))
+SELECT O_Shipmode
 FROM Orders2, Item2
 WHERE O_ItemID = I_ID
 AND I_Name = 'Gremlin'
@@ -224,6 +225,12 @@ GROUP BY C_Name;
 
 -- 15. Find all parts with the same size
 
-SELECT * 
-FROM Item2
+SELECT  *
+FROM Item2 
+WHERE I_Size IN (
+    SELECT I_Size
+    FROM Item2
+    GROUP BY I_Size
+    HAVING COUNT(*) > 1
+)
 ORDER BY I_Size;
