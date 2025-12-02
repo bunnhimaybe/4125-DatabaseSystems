@@ -7,7 +7,13 @@ import java.util.TreeMap;
 import java.util.HashMap;
 public class Phase2_Task4_QueryProcessing {
 
-    // Retrieve the names of all nurses who monitor at least one bed. 
+    /* Retrieve the names of all nurses who monitor at least one bed. 
+        SELECT DISTINCT name
+        FROM nurse, bed
+        WHERE nurse.ID = bed.nurse_id;
+     */
+
+    // INNER JOIN == nested for
     public static void Query09(){
 
         Map<String, String> nurseMap = new HashMap<>(); // nurse name lookup
@@ -69,7 +75,14 @@ public class Phase2_Task4_QueryProcessing {
     }
 
 
-    // For each physician ID, list the total number of hours worked.
+    /* For each physician ID, list the total number of hours worked.
+        SELECT physician_id, SUM(hours)
+        FROM timecard
+        GROUP BY physician_id;
+     */
+
+    // GROUP BY == HashMap
+    // word count == dictionary
     public static void Query10(){
 
         Map<String, Integer> physicianHours = new TreeMap<>();
@@ -123,13 +136,5 @@ public class Phase2_Task4_QueryProcessing {
         System.out.println();
         Query10();
         
-        // Compute the query
-        
-        // Print the results 
-        
-        // Hint: We have used some useful methods in the project, e.g., trim(), split(), etc.
-        // Hint: It may be useful to store results in a data structure, such as a HashMap, 
-        // that you can later print after you after done all of the processing.
-        // Hint: One way to process a JOIN or a subquery is a double for-loop.
     }
 }

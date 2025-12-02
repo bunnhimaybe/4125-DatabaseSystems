@@ -109,7 +109,9 @@ ORDER BY p.physician_id;
 -- 14. For each physician specialty, list the specialty, 
     -- the number of physicians that have that specialty, 
     -- and the total number of hours worked by those physicians.
-SELECT p.physician_specialty, COUNT(p.physician_name) AS Count, SUM(c.c_hours) AS Total_Hours
+SELECT p.physician_specialty, 
+    COUNT(DISTINCT p.physician_id) AS Count, 
+    SUM(c.c_hours) AS Total_Hours
 FROM physician p INNER JOIN timecard c
 ON p.physician_id = c.physician_id
 GROUP BY p.physician_specialty
@@ -164,7 +166,7 @@ WHERE n.nurse_salary = (
 
 -- 18. Retrieve the average age of patients assigned to a bed.
 SELECT ROUND(AVG(p.patient_age)) AS avg_age
-FROM patient P INNER JOIN bed b
+FROM patient p INNER JOIN bed b
 ON p.patient_num = b.patient_num;
 
 -- 19. This problem requires (no points if you don't) you to use 
@@ -173,4 +175,6 @@ ON p.patient_num = b.patient_num;
     -- (e.g., return 101, but not 102).
 SELECT bed_num, bed_room_num
 FROM bed
-WHERE REGEXP_LIKE(bed_room_num, '.*(1|3|5|7|9)$' );
+WHERE REGEXP_LIKE(bed_room_num, '[13579]$' );
+-- WHERE REGEXP_LIKE(bed_room_num, '*[13579]$' );
+-- WHERE REGEXP_LIKE(bed_room_num, '.*(1|3|5|7|9)$' );
