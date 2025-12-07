@@ -1,14 +1,8 @@
-import java.io.Scanner;
-import java.util.Exception;
+import java.util.Scanner;
 import java.sql.*;
 
 class Phase3_Task1 {
 	public static void main(String[] args) {
-		
-		Scanner sc = new Scanner(System.in);
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:Oracle21c", "lapham", "funData");
-		
 		/* SCHEMA: Nurse
 			nurse_id VARCHAR2(4),
 			nurse_name VARCHAR2(25),
@@ -29,8 +23,8 @@ class Phase3_Task1 {
 			"""; 
 		*/
 		
-		PreparedStatement stmt;
-		ResultSet queryResult;
+		PreparedStatement stmt = null;
+		ResultSet queryResult = null;
 		// queries
 		String idName = "SELECT nurse_name FROM Nurses WHERE nurse_ID = ?";
 		String idSupervisingCnt = "SELECT COUNT(*) FROM Nurses WHERE nurse_supervisor_id = ?";
@@ -39,6 +33,10 @@ class Phase3_Task1 {
 					
 		try {
 			
+			Scanner sc = new Scanner(System.in);
+			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:Oracle21c", "lapham", "funData");
+			Class.forName("oracle.jdbc.driver.OracleDriver");		
+
 			// read input argument (nurse_ID) 
 			System.out.println("Enter nurse_ID: ");				
 			String nurseID = sc.next();
@@ -86,15 +84,19 @@ class Phase3_Task1 {
 			System.out.printf("%-25s %-5s %-15s%n", "-".repeat(25), "-".repeat(5), "-".repeat(15));
 			System.out.printf("%-25s %-5d %-15d%n", nurseName, supervisingCnt, supervisingSalaries);
 			
-			
-		} catch (Exception e) {
-			System.err.println(e.printStackTrace());
-			return;
-		} finally {
 			if (queryResult != null) queryResult.close();
 			if (stmt != null) stmt.close();
 			if (conn != null) conn.close();
 			sc.close();
+
+
+		} catch (ClassNotFoundException jdbcException) {
+			jdbcException.printStackTrace();	
+		} catch (SQLException sqlExcept) {
+			sqlExcept.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
 		}
 		
 		/*

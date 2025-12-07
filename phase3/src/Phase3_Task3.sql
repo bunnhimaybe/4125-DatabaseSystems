@@ -1,6 +1,6 @@
 -- 1. INSERT TRIGGER: Check how many beds a nurse is monitoring.
 
-CREATE TRIGGER AddBed
+CREATE OR REPLACE TRIGGER AddBed
 BEFORE INSERT ON Bed
 FOR EACH ROW
 DECLARE
@@ -11,30 +11,36 @@ BEGIN
     -- Nurse is too busy to monitor more beds.
     IF (NumBeds >= 2) THEN
         RAISE_APPLICATION_ERROR(-20011, 'Nurse is too busy.');
+    -- Nurse may accept a new bed.
+    ELSE
+        UPDATE Nurse SET BedsMonitored = BedsMonitored+1
+            WHERE nurse_id = :NEW.nurse_id;
     END IF;
 EXCEPTION
-    -- Nurse not assigned
+    -- unassigned beds allowed
     WHEN NO_DATA_FOUND THEN
-        RAISE_APPLICATION_ERROR(-20010, 'Invalid or NULL Nurse ID.');
-END;/
+        DBMS_OUTPUT.PUT_LINE('Nurse is not assigned; Nurse ID is invalid or NULL.');
+END;
+/
 
 
 
 -- 2. DELETE TRIGGER: Removing a bed updates the number of beds a nurse is monitoring. 
 
-CREATE TRIGGER RemoveBed
+CREATE OR REPLACE TRIGGER RemoveBed
 AFTER DELETE ON Bed
 FOR EACH ROW
 BEGIN
     UPDATE Nurse SET BedsMonitored = GREATEST(BedsMonitored-1, 0)
     WHERE nurse_id = :OLD.nurse_id;     
-END;/
+END;
+/
 
 
 
 -- 3. UPDATE TRIGGER: Bed assignment of Nurse is changed. 
 
-CREATE TRIGGER UpdateBed
+CREATE OR REPLACE TRIGGER UpdateBed
 BEFORE UPDATE OF nurse_id ON Bed
 FOR EACH ROW
 DECLARE
@@ -59,4 +65,5 @@ BEGIN
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
         RAISE_APPLICATION_ERROR(-20010, 'Invalid or NULL Nurse ID.');
-END;/
+END;
+/

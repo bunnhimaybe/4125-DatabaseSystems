@@ -8,15 +8,15 @@ AS
     supervisee_beds NUMBER := 0; 
     CURSOR Supervisees IS 
         SELECT nurse_id, nurse_name
-        FROM Nurses WHERE nurse_supervisor_id = report_id;
+        FROM Nurse WHERE nurse_supervisor_id = report_id;
 BEGIN
     -- nurse exists?
     SELECT nurse_name INTO report_name 
-        FROM Nurses WHERE nurse_id = report_id;
+        FROM Nurse WHERE nurse_id = report_id;
     -- supervisee exists? calculate supervisee count and total salaries
     SELECT COUNT(*), SUM(nurse_salary) 
         INTO supervisee_count, supervisee_salaries
-        FROM Nurses WHERE nurse_supervisor_id = report_id; 
+        FROM Nurse WHERE nurse_supervisor_id = report_id; 
     IF supervisee_count = 0 THEN
         DBMS_OUTPUT.PUT_LINE('This nurse is not a supervisor.');
         RETURN;
@@ -26,7 +26,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE(
         'Nurses supervised: ' || supervisee_count || 
         ' ($' || supervisee_salaries || ')');
-    DBMS_OUTPUT.PUT_LINE();
+    DBMS_OUTPUT.NEW_LINE();
     -- print supervisor report 
     DBMS_OUTPUT.PUT_LINE(
         RPAD('ID', 10, ' ') || 
@@ -36,7 +36,7 @@ BEGIN
     FOR supervisee IN Supervisees LOOP
         -- calculate count of beds monitored by each supervisee 
         SELECT COUNT(*) INTO supervisee_beds
-            FROM Beds WHERE nurse_id = supervisee.nurse_id;
+            FROM Bed WHERE nurse_id = supervisee.nurse_id;
         DBMS_OUTPUT.PUT_LINE(
             RPAD(TO_CHAR(supervisee.nurse_id), 10, ' ') || 
             RPAD(supervisee.nurse_name, 25, ' ') || 
